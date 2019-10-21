@@ -38,3 +38,5 @@ The following functions are currently implemented:
 * `map`: takes in an array and a function on how to manipulate that array and adds that array according to that function
 * `takeUntil`: takes in an array and a function, that function will tell takeUntil to create a new array with only the desired elements
 * `without`: takes in an array and a list of desired elements to be removed, returns a new array with the elements that weren't removed.
+* `eqArrays`: takes in two arrays, compares them and returns true is they are equal
+* `eqObjects`: takes in two objects, compares them, and then returns a true or false, plus the objects

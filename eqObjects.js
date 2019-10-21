@@ -1,27 +1,18 @@
 // Returns true if both objects have identical keys with identical values.
 // Otherwise you get back a big fat false!
-const assertEqual = function(arr) {
-
-  let word = arr[0];
-  if (word) {
-    console.log(`Assertion Passed: ${JSON.stringify(arr[1])} === ${JSON.stringify(arr[2])}`);
-  } else {
-    console.log(`Assertion Failed: ${JSON.stringify(arr[1])} !== ${JSON.stringify(arr[2])}`);
-  }
-};
 
 const eqObjects = function(object1, object2) {
   let objOne = size(object1);  // here, each object has it's length checked, if the length is different
   let objTwo = size(object2);  // there is no point checking the further
   let count = 0;
-  let superObj = {};
-  let superObjTwo = {};
+  //let superObj = {};
+  //let superObjTwo = {};
   if(objOne === objTwo){  // if their length is the same, then move forward
     for ( let i in object1){ // here each key is checked
-      if (typeof object1[i] === 'object') { // checking if value of key is an object
-        superObj = buildObj(object1);  // here sending to buildObj function to flat the object
-        superObjTwo = buildObj(object2);
-      }
+      // if (typeof object1[i] === 'object') { // checking if value of key is an object
+      //   superObj = buildObj(object1);  // here sending to buildObj function to flat the object
+      //   superObjTwo = buildObj(object2);
+      // }
       if(Array.isArray(object1[i]) && i in object2){  // here the value of the key is checked if it's an array
         let arr = compare(object1[i],object2[i]);  // here the values of the keys of both objects are sent to a function to compare if they are arrays
         if(arr){  // if they are equal, true is returned and count gets a +1
@@ -41,22 +32,22 @@ const eqObjects = function(object1, object2) {
   }
 };
 
-const buildObj = function(newObj) {
-  let result = {};
-  for (let item in newObj) {
-    console.log(newObj[item]);
-    console.log(item);
-    if (typeof newObj[item] === 'object') { // ** building a new object
-      result[item] = '';
-      result = buildObj(newObj[item]);
-    } else {
-      console.log(result);
-      result[item] = newObj[item];
-    }
-  }
-  console.log(result);
+// const buildObj = function(newObj) {
+//   let result = {};
+//   for (let item in newObj) {
+//     console.log(newObj[item]);
+//     console.log(item);
+//     if (typeof newObj[item] === 'object') { // ** building a new object
+//       result[item] = '';
+//       result = buildObj(newObj[item]);
+//     } else {
+//       console.log(result);
+//       result[item] = newObj[item];
+//     }
+//   }
+//   console.log(result);
 
-}
+// }
 
 const compare = function(arrOne, arrTwo){
   let num = 0;
@@ -86,24 +77,24 @@ const size = function(obj){ // this counts the length of an object
   return count;
 };
 
-const ab = { a: "1", b: "2" };
-const ba = { b: "2", a: "1" };
-//assertEqual(eqObjects(ab, ba)); // => true
+// const ab = { a: "1", b: "2" };
+// const ba = { b: "2", a: "1" };
+// //assertEqual(eqObjects(ab, ba)); // => true
 
-const abc = { a: "1", b: "2", c: "3" };
-//assertEqual(eqObjects(ab, abc)); // => false
+// const abc = { a: "1", b: "2", c: "3" };
+// //assertEqual(eqObjects(ab, abc)); // => false
 
-const cd = { c: "1", d: ["2", 3] };
-const dc = { d: ["2", 3], c: "1" };
-//assertEqual(eqObjects(cd, dc)); // => true
+// const cd = { c: "1", d: ["2", 3] };
+// const dc = { d: ["2", 3], c: "1" };
+// //assertEqual(eqObjects(cd, dc)); // => true
 
-const cd2 = { c: "1", d: ["2", 3, 4] };
-//assertEqual(eqObjects(cd, cd2)); // => false
+// const cd2 = { c: "1", d: ["2", 3, 4] };
+// //assertEqual(eqObjects(cd, cd2)); // => false
 
 
 
-//eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }) // => true
-eqObjects({ a: 22, d: { c: 44, f: 90}, g: "hello", l: true}, { a: 22, d: { c: 44, f: 90}, g: "hello", l: true}) // => true
+// //eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }) // => true
+// eqObjects({ a: 22, d: { c: 44, f: 90}, g: "hello", l: true}, { a: 22, d: { c: 44, f: 90}, g: "hello", l: true}) // => true
 
-eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }) // => false
-eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }) // => false
+// eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }) // => false
+// eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }) // => false
