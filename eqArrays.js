@@ -1,3 +1,5 @@
+const assertEqual = require('./assertEqual');
+
 const eqArrays = function(arrOne, arrTwo) {
   let count = 0;
   if (arrOne.length === arrTwo.length) {  // checks if the arrays are different length
@@ -16,13 +18,7 @@ const eqArrays = function(arrOne, arrTwo) {
   }
 };
 
-const assertEqual = function(actual, expected) {
-  if (actual === expected) {
-    console.log(`Assertion Passed: ${actual} === ${expected}`);
-  } else {
-    console.log(`Assertion Failed: ${actual} !== ${expected}`);
-  }
-};
+module.exports = eqArrays;
 
 //eqArrays([1, 2, 3], [1, 2, 3]) // => true
 //eqArrays([1, 2, 3], [3, 2, 1]) // => false
@@ -30,9 +26,3 @@ const assertEqual = function(actual, expected) {
 //eqArrays(["1", "2", "3"], ["1", "2", "3"]) // => true
 //eqArrays(["1", "2", "3"], ["1", "2", 3]) // => false
 
-assertEqual(eqArrays([1, 2, 3], [1, 2, 3]), true); // => should PASS
-assertEqual(eqArrays([1, 2, 3], [3, 2, 1]), false);
-assertEqual(eqArrays(["1", "2", "3"], ["1", "2", "3"]), true);
-assertEqual(eqArrays(["1", "2", "3"], ["3", "2", "1"]), false);
-assertEqual(eqArrays(["1", "2", "3"], ["1", "2", 3]), false);
-assertEqual(eqArrays([1, 2, 3], [1, 2, 3, 4]), false);
