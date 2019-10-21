@@ -11,29 +11,52 @@ const assertEqual = function(arr) {
 };
 
 const eqObjects = function(object1, object2) {
-  let objOne = size(object1);
-  let objTwo = size(object2);
+  let objOne = size(object1);  // here, each object has it's length checked, if the length is different
+  let objTwo = size(object2);  // there is no point checking the further
   let count = 0;
-  if(objOne === objTwo){
-    for ( let i in object1){
-      if(Array.isArray(object1[i]) && i in object2){
-        let arr = compare(object1[i],object2[i]);
-        if(arr){
+  let superObj = {};
+  let superObjTwo = {};
+  if(objOne === objTwo){  // if their length is the same, then move forward
+    for ( let i in object1){ // here each key is checked
+      if (typeof object1[i] === 'object') { // checking if value of key is an object
+        superObj = buildObj(object1);  // here sending to buildObj function to flat the object
+        superObjTwo = buildObj(object2);
+      }
+      if(Array.isArray(object1[i]) && i in object2){  // here the value of the key is checked if it's an array
+        let arr = compare(object1[i],object2[i]);  // here the values of the keys of both objects are sent to a function to compare if they are arrays
+        if(arr){  // if they are equal, true is returned and count gets a +1
           count++;
         } else {
-          return [false, object1, object2];
+          return [false, object1, object2];  // if they arrays are different, false is returned and the check ends here
         }
-      } else if(i in object2 && object1[i] === object2[i]){
-        count++;
-      }
+      } else if(i in object2 && object1[i] === object2[i]){ // if they are not arrays but objects, then the key is checked to see if
+        count++;                                            // it exists in the 2nd object, then compares both values, if both are
+      }                                                     // true then another count is added
     }
-    if (objOne === count){
-      return [true, object1, object2];
+    if (objOne === count){  // here checks if the number of coutns, basically the number of checks, equal the object's length, making sure every
+      return [true, object1, object2]; // key and value was checked, then returns true
     }
   } else {
-    return [false, object1, object2];
+    return [false, object1, object2];  // if their length is not the same, returns false
   }
 };
+
+const buildObj = function(newObj) {
+  let result = {};
+  for (let item in newObj) {
+    console.log(newObj[item]);
+    console.log(item);
+    if (typeof newObj[item] === 'object') { // ** building a new object
+      result[item] = '';
+      result = buildObj(newObj[item]);
+    } else {
+      console.log(result);
+      result[item] = newObj[item];
+    }
+  }
+  console.log(result);
+
+}
 
 const compare = function(arrOne, arrTwo){
   let num = 0;
@@ -65,14 +88,22 @@ const size = function(obj){ // this counts the length of an object
 
 const ab = { a: "1", b: "2" };
 const ba = { b: "2", a: "1" };
-assertEqual(eqObjects(ab, ba)); // => true
+//assertEqual(eqObjects(ab, ba)); // => true
 
 const abc = { a: "1", b: "2", c: "3" };
-assertEqual(eqObjects(ab, abc)); // => false
+//assertEqual(eqObjects(ab, abc)); // => false
 
 const cd = { c: "1", d: ["2", 3] };
 const dc = { d: ["2", 3], c: "1" };
-assertEqual(eqObjects(cd, dc)); // => true
+//assertEqual(eqObjects(cd, dc)); // => true
 
 const cd2 = { c: "1", d: ["2", 3, 4] };
-assertEqual(eqObjects(cd, cd2)); // => false
+//assertEqual(eqObjects(cd, cd2)); // => false
+
+
+
+//eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }) // => true
+eqObjects({ a: 22, d: { c: 44, f: 90}, g: "hello", l: true}, { a: 22, d: { c: 44, f: 90}, g: "hello", l: true}) // => true
+
+eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }) // => false
+eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }) // => false
