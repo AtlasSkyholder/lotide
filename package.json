@@ -1,7 +1,7 @@
 {
-  "name": "lotide",
+  "name": "@atlasskyholder/lotide",
   "version": "1.0.0",
-  "description": "",
+  "description": "mini lodash project for the purposes of education only",
   "main": "assertArraysEqual.js",
   "directories": {
     "test": "test"
@@ -19,7 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/AtlasSkyholder/lotide.git"
   },
-  "author": "",
+  "author": "@atlasskyholder",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AtlasSkyholder/lotide/issues"
