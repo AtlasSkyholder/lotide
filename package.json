@@ -1,6 +1,6 @@
 {
   "name": "@atlasskyholder/lotide",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "mini lodash project for the purposes of education only",
   "main": "assertArraysEqual.js",
   "directories": {
