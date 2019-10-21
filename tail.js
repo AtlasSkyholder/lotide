@@ -3,9 +3,9 @@ const assertEqual = require('./assertEqual');
 let tail = function(words) {
   let newArr = [];
   if (words.length === 1) {
-    console.log("The array only has one element.");
+    return [];
   } else if (words.length < 1) {
-    console.log("This is an empty array");
+    return [];
   } else {
     for (let i = 1; i < words.length; i++) {
       newArr.push(words[i]);
